@@ -1,10 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head('SkillBridge - Home')}"></head>
+
 <body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<main>
+
+    <section class="hero">
+        <div class="hero-overlay">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <h1>Connect Talent With Opportunity</h1>
+
+                    <p>
+                        Find your dream job or discover your next great hire.
+                    </p>
+
+                    <div class="mt-4">
+
+                        <a th:href="@{/register}"
+                           class="btn btn-primary btn-lg me-2">
+                            Get Started
+                        </a>
+
+                        <a th:href="@{/jobs}"
+                           class="btn btn-outline-light btn-lg">
+                            Browse Jobs
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="container py-5">
+
+        <div class="row text-center">
+
+            <div class="col-md-4">
+                <div class="card-custom">
+                    <h3>For Candidates</h3>
+                    <p>
+                        Search jobs, apply instantly and track your applications.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card-custom">
+                    <h3>For Recruiters</h3>
+                    <p>
+                        Create job listings and manage applicants efficiently.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card-custom">
+                    <h3>Professional Growth</h3>
+                    <p>
+                        Build your skills portfolio and showcase your experience.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="container py-5">
+
+        <div class="row align-items-center">
+
+            <div class="col-md-6">
+                <img th:src="@{/images/career-growth.jpg}"
+                     alt="Career Growth"
+                     class="img-fluid rounded">
+            </div>
+
+            <div class="col-md-6">
+
+                <h2>Grow Your Career</h2>
+
+                <p>
+                    Discover opportunities from leading companies and take the
+                    next step in your professional journey.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
 
 </body>
 </html>

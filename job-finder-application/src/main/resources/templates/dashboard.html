@@ -1,10 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head('Dashboard')}"></head>
+
 <body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<main class="dashboard-container container">
+
+    <div class="dashboard-banner mb-4">
+
+        <img th:src="@{/images/dashboard-banner.jpg}"
+             alt="Dashboard Banner">
+
+    </div>
+
+    <h1 class="mb-4">
+        Welcome, <span th:text="${user.firstName}">John</span>!
+    </h1>
+
+    <div th:replace="~{fragments/messages :: messages}"></div>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h2 th:text="${jobsCount}">0</h2>
+            <p>Jobs Posted</p>
+        </div>
+
+        <div class="stat-card">
+            <h2 th:text="${applicationsCount}">0</h2>
+            <p>Applications</p>
+        </div>
+
+        <div class="stat-card">
+            <h2 th:text="${skillsCount}">0</h2>
+            <p>Skills</p>
+        </div>
+
+    </div>
+
+    <div class="section-title">
+        <h3>Recent Job Offers</h3>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4 mb-3"
+             th:each="job : ${recentJobs}">
+
+            <div class="card-custom">
+
+                <h5 th:text="${job.title}">
+                    Java Developer
+                </h5>
+
+                <p th:text="${job.company}">
+                    Company
+                </p>
+
+                <a class="btn btn-primary"
+                   th:href="@{/jobs/{id}(id=${job.id})}">
+                    View Details
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
 
 </body>
 </html>
