@@ -19,7 +19,7 @@
         <div th:replace="~{fragments/messages :: messages}"></div>
 
         <form th:action="@{/login}"
-              th:object="${userDTO}"
+              th:object="${userLoginRequest}"
               method="post">
 
             <div class="form-group">
