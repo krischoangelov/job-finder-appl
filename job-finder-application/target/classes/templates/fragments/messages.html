@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div th:fragment="messages">
 
-</body>
-</html>
+    <div th:if="${successMessage}"
+         class="alert alert-success">
+
+        <span th:text="${successMessage}"></span>
+
+    </div>
+
+    <div th:if="${errorMessage}"
+         class="alert alert-danger">
+
+        <span th:text="${errorMessage}"></span>
+
+    </div>
+
+</div>

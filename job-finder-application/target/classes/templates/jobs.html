@@ -1,10 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head('Job Listings')}"></head>
+
 <body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<main class="jobs-container container">
+
+    <h1 class="mb-4">
+        Available Job Offers
+    </h1>
+
+    <div class="search-box">
+
+        <form method="get"
+              th:action="@{/jobs}">
+
+            <div class="row">
+
+                <div class="col-md-4">
+
+                    <input type="text"
+                           name="keyword"
+                           class="form-control"
+                           placeholder="Search jobs">
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <input type="text"
+                           name="location"
+                           class="form-control"
+                           placeholder="Location">
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <button class="btn btn-primary w-100"
+                            type="submit">
+
+                        Search
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="mb-4"
+         th:if="${isRecruiter}">
+
+        <a class="btn btn-success"
+           th:href="@{/jobs/create}">
+            Create New Job Offer
+        </a>
+
+    </div>
+
+    <div class="jobs-grid">
+
+        <div class="job-card"
+             th:each="job : ${jobs}">
+
+            <h3 th:text="${job.title}">
+                Senior Java Developer
+            </h3>
+
+            <p>
+                <strong>Company:</strong>
+                <span th:text="${job.company}">
+                    Company
+                </span>
+            </p>
+
+            <p>
+                <strong>Location:</strong>
+                <span th:text="${job.location}">
+                    Sofia
+                </span>
+            </p>
+
+            <p>
+                <strong>Salary:</strong>
+                <span th:text="${job.salary}">
+                    5000
+                </span>
+            </p>
+
+            <p>
+                <strong>Deadline:</strong>
+                <span th:text="${job.deadline}">
+                    2026-01-01
+                </span>
+            </p>
+
+            <div class="job-actions">
+
+                <a class="btn btn-primary"
+                   th:href="@{/jobs/{id}(id=${job.id})}">
+                    View
+                </a>
+
+                <a class="btn btn-success"
+                   th:if="${isCandidate}"
+                   th:href="@{/applications/create/{id}(id=${job.id})}">
+                    Apply
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
 
 </body>
 </html>

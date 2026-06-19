@@ -38,13 +38,13 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole role;
     private LocalDateTime createdOn;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "recruiter")
     @OrderBy("createdOn DESC")
     private List<JobOffer> createdJobs = new ArrayList<>();
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "candidate")
     @OrderBy("appliedAt DESC")
     private List<JobApplication> jobApplications = new ArrayList<>();
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     @OrderBy("acquiredAt DESC")
     private List<Skill> skills = new ArrayList<>();
 }

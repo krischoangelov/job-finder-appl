@@ -40,7 +40,7 @@ public class JobOffer {
     @ManyToOne
     @JoinColumn(name = "recruiter_id")
     private User recruiter;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "jobOffer")
     @OrderBy("appliedAt DESC")
     private List<JobApplication> jobApplications = new ArrayList<>();
 }

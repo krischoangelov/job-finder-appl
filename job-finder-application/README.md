@@ -21,6 +21,7 @@ The project was developed as an Individual Project Assignment for the Spring Fun
 * Spring MVC
 * Spring Data JPA
 * Thymeleaf
+* Hibernate
 
 ## Database
 

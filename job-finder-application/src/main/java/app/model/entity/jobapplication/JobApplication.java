@@ -20,14 +20,19 @@ public class JobApplication {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
     @Column(nullable = false)
     private String motivationLetter;
+
     @Enumerated(EnumType.STRING)
     private ApplicationStatus status;
+
     private LocalDateTime appliedAt;
+
     @ManyToOne
     @JoinColumn(name = "candidate_id")
     private User candidate;
+
     @ManyToOne
     @JoinColumn(name = "jobOffer_id")
     private JobOffer jobOffer;
