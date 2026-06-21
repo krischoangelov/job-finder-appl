@@ -121,7 +121,7 @@ public class Mapper {
                 .lastName(userRegisterRequest.getLastName())
                 .profilePicture("")
                 .email(userRegisterRequest.getEmail())
-                .role(UserRole.CANDIDATE)
+                .role(userRegisterRequest.getRole())
                 .createdOn(LocalDateTime.now())
                 .build();
     }

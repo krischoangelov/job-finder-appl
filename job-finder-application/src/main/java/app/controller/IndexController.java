@@ -94,4 +94,6 @@ public class IndexController {
         httpSession.invalidate();
         return new ModelAndView("redirect:");
     }
+
+
 }
