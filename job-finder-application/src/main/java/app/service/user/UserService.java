@@ -64,16 +64,9 @@ public class UserService {
         return Mapper.toUserDTO(user);
     }
 
-    public List<String> getAllUsernames() {
-        return userRepository.findAll().stream().map(User::getUsername).toList();
-    }
 
     public UserDTO updateProfile(UUID id, UserUpdateProfileRequest userUpdateProfileRequest) {
         User user = userRepository.findById(id).orElse(null);
-
-        if (getAllUsernames().contains(userUpdateProfileRequest.getUsername())) {
-            throw new RuntimeException("User with this username already exists");
-        }
 
         if (user == null) {
             throw new RuntimeException("User with the searched ID does not exist");
