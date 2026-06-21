@@ -47,6 +47,11 @@ public class UserService {
         String encodedPassword = passwordEncoder.encode(userRegisterRequest.getPassword());
         userRegisterRequest.setPassword(encodedPassword);
 
+        if (!userRegisterRequest.getPassword().equals(userRegisterRequest.getConfirmPassword())) {
+            throw new RuntimeException("Passwords do not match");
+        }
+
+
         User entityUser = Mapper.toUserEntity(userRegisterRequest);
 
         userRepository.save(entityUser);

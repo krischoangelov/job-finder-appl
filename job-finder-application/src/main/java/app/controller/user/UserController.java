@@ -18,6 +18,8 @@ public class UserController {
         this.userService = userService;
     }
 
+
+
     @GetMapping("/profile")
     public ModelAndView getProfilePage(@PathVariable UUID id) {
 
@@ -37,6 +39,18 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("home");
         modelAndView.addObject("userDTO", user);
+        return modelAndView;
+    }
+
+    @GetMapping("/dashboard")
+    public ModelAndView getDashboardPage(@PathVariable UUID id) {
+
+        UserDTO user = userService.getById(id);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("dashboard");
+        modelAndView.addObject("user", user);
+
         return modelAndView;
     }
 }

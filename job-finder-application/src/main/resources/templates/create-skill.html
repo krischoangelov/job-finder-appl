@@ -12,7 +12,7 @@
         <h2>Add Skill</h2>
 
         <form method="post"
-              th:object="${skillDTO}"
+              th:object="${skill}"
               th:action="@{/skills/create}">
 
             <div class="form-group">
@@ -33,7 +33,7 @@
                 <label>Level</label>
 
                 <select class="form-control"
-                        th:field="*{proficiencyLevel}">
+                        th:field="*{level}">
 
                     <option value="BEGINNER">Beginner</option>
                     <option value="INTERMEDIATE">Intermediate</option>

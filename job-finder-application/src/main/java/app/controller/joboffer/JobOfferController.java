@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class JobOfferController {
 
     @GetMapping
-    public ModelAndView getJobsPage() {
+    public ModelAndView getOffersPage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("jobs");
         return modelAndView;
