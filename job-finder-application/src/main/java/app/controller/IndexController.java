@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -45,19 +46,20 @@ public class IndexController {
             return new ModelAndView("login");
         }
 
+        UserDTO user = userService.login(userLoginRequest);
+        httpSession.setAttribute("user_id", user.getId());
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("userLoginRequest", userLoginRequest);
         modelAndView.setViewName("redirect:/home");
-
-        UserDTO user = userService.login(userLoginRequest);
-        httpSession.setAttribute("user_id", user.getId());
 
         return modelAndView;
     }
 
     @GetMapping("/home")
     public ModelAndView getHomePage(HttpSession httpSession) {
-        UserDTO user = userService.getById((UUID) httpSession.getAttribute("user_id"));
+        UUID uuid = (UUID) httpSession.getAttribute("user_id");
+        UserDTO user = userService.getById(uuid);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("home");
         modelAndView.addObject("user", user);
@@ -76,19 +78,15 @@ public class IndexController {
     }
 
     @PostMapping("/register")
-    public ModelAndView register(@Valid UserRegisterRequestDTO userRegisterRequest, BindingResult bindingResult) {
+    public ModelAndView register(@Valid @ModelAttribute("userRegisterRequest") UserRegisterRequestDTO userRegisterRequest, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return new ModelAndView("register");
         }
 
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("userRegisterRequest", userRegisterRequest);
-        modelAndView.setViewName("redirect:/login");
-
         userService.register(userRegisterRequest);
 
-        return modelAndView;
+        return new ModelAndView("redirect:/login");
     }
 
     @GetMapping("/logout")

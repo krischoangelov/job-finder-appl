@@ -18,17 +18,21 @@ public class Mapper {
 
     public static UserDTO toUserDTO(User user) {
 
-        List<JobOfferDTO> jobOfferDTOList = user.getCreatedJobs()
+        if (user == null) {
+            return null;
+        }
+
+        List<JobOfferDTO> jobOfferDTOList = user.getCreatedJobs() == null ? List.of() : user.getCreatedJobs()
                 .stream()
                 .map(Mapper::toJobOfferDTO)
                 .toList();
 
-        List<JobApplicationDTO> jobApplicationDTOList = user.getJobApplications()
+        List<JobApplicationDTO> jobApplicationDTOList = user.getJobApplications() == null ? List.of() : user.getJobApplications()
                 .stream()
                 .map(Mapper::toJobApplicationDTO)
                 .toList();
 
-        List<SkillDTO> skillDTOList = user.getSkills()
+        List<SkillDTO> skillDTOList = user.getSkills() == null ? List.of() : user.getSkills()
                 .stream()
                 .map(Mapper::toSkillDTO)
                 .toList();
@@ -38,8 +42,8 @@ public class Mapper {
                 .id(user.getId())
                 .username(user.getUsername())
                 .firstName(user.getFirstName())
-                .lastName(user.getLastName()).
-                profilePicture(user.getProfilePicture())
+                .lastName(user.getLastName())
+                .profilePicture(user.getProfilePicture())
                 .email(user.getEmail())
                 .role(user.getRole())
                 .createdOn(user.getCreatedOn())
@@ -50,6 +54,10 @@ public class Mapper {
     }
 
     public static JobOfferDTO toJobOfferDTO(JobOffer jobOffer) {
+
+        if (jobOffer == null) {
+            return null;
+        }
 
         List<JobApplicationDTO> jobApplicationDTOList = jobOffer.getJobApplications()
                 .stream()
@@ -71,6 +79,11 @@ public class Mapper {
     }
 
     public static JobApplicationDTO toJobApplicationDTO(JobApplication jobApplication) {
+
+        if (jobApplication == null) {
+            return null;
+        }
+
         return JobApplicationDTO.builder()
                 .id(jobApplication.getId())
                 .motivationLetter(jobApplication.getMotivationLetter())
@@ -82,6 +95,11 @@ public class Mapper {
     }
 
     public static SkillDTO toSkillDTO(Skill skill) {
+
+        if (skill == null) {
+            return null;
+        }
+
         return SkillDTO.builder()
                 .id(skill.getId())
                 .name(skill.getName())
@@ -91,13 +109,18 @@ public class Mapper {
     }
 
     public static User toUserEntity(UserRegisterRequestDTO userRegisterRequest) {
+
+        if (userRegisterRequest == null) {
+            return null;
+        }
+
         return User.builder()
                 .username(userRegisterRequest.getUsername())
                 .password(userRegisterRequest.getPassword())
                 .firstName(userRegisterRequest.getFirstName())
                 .lastName(userRegisterRequest.getLastName())
+                .profilePicture("")
                 .email(userRegisterRequest.getEmail())
-                .password(userRegisterRequest.getPassword())
                 .role(UserRole.CANDIDATE)
                 .createdOn(LocalDateTime.now())
                 .build();

@@ -3,6 +3,7 @@ package app.service.user;
 import app.model.dto.user.UserDTO;
 import app.model.dto.user.UserLoginRequestDTO;
 import app.model.dto.user.UserRegisterRequestDTO;
+import app.model.dto.user.UserUpdateProfileRequest;
 import app.model.entity.user.User;
 import app.repository.user.UserRepository;
 import app.utils.Mapper;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -28,7 +30,7 @@ public class UserService {
     public UserDTO login(UserLoginRequestDTO userLoginRequest) {
        User user = userRepository.findByEmail(userLoginRequest.getEmail()).orElse(null);
 
-       if (user == null || passwordEncoder.matches(user.getPassword(), userLoginRequest.getPassword())) {
+       if (user == null || !passwordEncoder.matches(userLoginRequest.getPassword(), user.getPassword())) {
            throw new RuntimeException("Email or password is invalid.");
        }
 
@@ -36,10 +38,10 @@ public class UserService {
     }
 
     public UserDTO register(UserRegisterRequestDTO userRegisterRequest) {
-        Optional<User> user = userRepository.findByUsername(userRegisterRequest.getUsername());
 
+        Optional<User> user = userRepository.findByUsername(userRegisterRequest.getUsername());
         if (user.isPresent()) {
-            throw new RuntimeException("User with this username already exists!");
+            throw new RuntimeException("User with this username already exists");
         }
 
         String encodedPassword = passwordEncoder.encode(userRegisterRequest.getPassword());
@@ -60,5 +62,28 @@ public class UserService {
         }
 
         return Mapper.toUserDTO(user);
+    }
+
+    public List<String> getAllUsernames() {
+        return userRepository.findAll().stream().map(User::getUsername).toList();
+    }
+
+    public UserDTO updateProfile(UUID id, UserUpdateProfileRequest userUpdateProfileRequest) {
+        User user = userRepository.findById(id).orElse(null);
+
+        if (getAllUsernames().contains(userUpdateProfileRequest.getUsername())) {
+            throw new RuntimeException("User with this username already exists");
+        }
+
+        if (user == null) {
+            throw new RuntimeException("User with the searched ID does not exist");
+        }
+
+        user.setUsername(userUpdateProfileRequest.getUsername());
+        user.setEmail(userUpdateProfileRequest.getEmail());
+        user.setFirstName(userUpdateProfileRequest.getFirstName());
+        user.setLastName(userUpdateProfileRequest.getLastName());
+
+        return Mapper.toUserDTO(userRepository.save(user));
     }
 }
