@@ -47,7 +47,7 @@ public class JobApplicationController {
         JobApplicationDTO application = jobApplicationService.getApplicationById(id, userId);
 
         ModelAndView modelAndView = new ModelAndView("details-application");
-        modelAndView.addObject("application", application);
+        modelAndView.addObject("jobApplication", application);
         modelAndView.addObject("isRecruiter", user.getRole().equals(UserRole.RECRUITER));
         modelAndView.addObject("isCandidate", user.getRole().equals(UserRole.CANDIDATE));
 
