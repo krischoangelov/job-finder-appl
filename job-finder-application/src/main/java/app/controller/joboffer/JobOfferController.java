@@ -51,7 +51,6 @@ public class JobOfferController {
         modelAndView.addObject("job", job);
         modelAndView.addObject("isRecruiter", user.getRole().equals(UserRole.RECRUITER));
         modelAndView.addObject("isCandidate", user.getRole().equals(UserRole.CANDIDATE));
-
         return modelAndView;
     }
 

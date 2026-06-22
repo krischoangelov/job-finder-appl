@@ -26,8 +26,8 @@ public class SkillController {
 
     @GetMapping
     public ModelAndView getSkillsPage(HttpSession httpSession) {
-
-        List<SkillDTO> skills = skillService.getSkillByUser((UUID) httpSession.getAttribute("user_id"));
+        UUID skillId = (UUID) httpSession.getAttribute("user_id");
+        List<SkillDTO> skills = skillService.getSkillByUser(skillId);
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("skills");

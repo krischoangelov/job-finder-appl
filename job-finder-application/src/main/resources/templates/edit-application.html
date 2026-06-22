@@ -14,7 +14,7 @@
         </h2>
 
         <form method="post"
-              th:object="${applicationDTO}"
+              th:object="${applicationRequest}"
               th:action="@{/applications/{id}/edit(id=${applicationId})}">
 
             <div class="form-group">

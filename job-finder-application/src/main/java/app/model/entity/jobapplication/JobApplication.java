@@ -30,10 +30,10 @@ public class JobApplication {
     private LocalDateTime appliedAt;
 
     @ManyToOne
-    @JoinColumn(name = "candidate_id")
+    @JoinColumn(name = "candidate_id", nullable = false)
     private User candidate;
 
     @ManyToOne
-    @JoinColumn(name = "jobOffer_id")
+    @JoinColumn(name = "job_offer_id", nullable = false)
     private JobOffer jobOffer;
 }

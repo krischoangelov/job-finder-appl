@@ -25,27 +25,38 @@
 
             <tbody>
 
-            <tr th:each="application : ${applications}">
+            <tr th:each="jobApplication : ${applications}">
 
-                <td th:text="${application.jobOffer.title}"></td>
+                <td th:text="${jobApplication.jobOffer.title}"></td>
 
-                <td th:text="${application.jobOffer.company}"></td>
+                <td th:text="${jobApplication.jobOffer.company}"></td>
 
-                <td th:text="${application.status}"></td>
+                <td th:text="${jobApplication.status}"></td>
 
-                <td th:text="${#temporals.format(application.appliedAt,'dd-MM-yyyy')}"></td>
+                <td th:text="${#temporals.format(jobApplication.appliedAt,'dd-MM-yyyy')}"></td>
 
                 <td>
 
                     <a class="btn btn-primary btn-sm"
-                       th:href="@{/applications/{id}(id=${application.id})}">
+                       th:href="@{/applications/{id}(id=${jobApplication.id})}">
                         Details
                     </a>
 
                     <a class="btn btn-warning btn-sm"
-                       th:href="@{/applications/{id}/edit(id=${application.id})}">
+                       th:href="@{/applications/{id}/edit(id=${jobApplication.id})}">
                         Edit
                     </a>
+
+                    <form th:action="@{/applications/{id}/withdraw(id=${jobApplication.id})}"
+                          method="post"
+                          class="d-inline">
+
+                        <button class="btn btn-danger btn-sm"
+                                type="submit">
+                            Withdraw
+                        </button>
+
+                    </form>
 
                 </td>
 
