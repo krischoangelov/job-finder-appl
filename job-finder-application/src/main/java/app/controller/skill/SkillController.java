@@ -1,7 +1,7 @@
 package app.controller.skill;
 
 import app.model.dto.skill.SkillDTO;
-import app.model.entity.skill.CreateSkillRequest;
+import app.model.dto.skill.CreateSkillRequest;
 import app.service.skill.SkillService;
 import app.service.user.UserService;
 import jakarta.servlet.http.HttpSession;

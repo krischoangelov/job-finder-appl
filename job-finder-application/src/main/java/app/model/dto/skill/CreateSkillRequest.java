@@ -1,4 +1,4 @@
-package app.model.entity.skill;
+package app.model.dto.skill;
 
 import app.model.enums.ProficiencyLevel;
 
