@@ -9,7 +9,6 @@ import app.model.entity.jobapplication.JobApplication;
 import app.model.entity.joboffer.JobOffer;
 import app.model.entity.skill.Skill;
 import app.model.entity.user.User;
-import app.model.enums.UserRole;
 
 import java.time.LocalDateTime;
 import java.util.List;

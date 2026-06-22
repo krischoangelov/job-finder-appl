@@ -1,8 +1,6 @@
 package app.repository.jobapplication;
 
 import app.model.entity.jobapplication.JobApplication;
-import app.model.entity.joboffer.JobOffer;
-import app.model.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

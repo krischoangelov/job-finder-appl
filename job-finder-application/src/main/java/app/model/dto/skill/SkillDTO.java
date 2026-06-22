@@ -2,7 +2,6 @@ package app.model.dto.skill;
 
 import app.model.entity.user.User;
 import app.model.enums.ProficiencyLevel;
-import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 

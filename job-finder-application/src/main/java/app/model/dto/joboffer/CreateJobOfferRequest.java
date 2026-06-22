@@ -2,7 +2,6 @@ package app.model.dto.joboffer;
 
 import app.model.entity.user.User;
 import app.model.enums.EmploymentType;
-import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

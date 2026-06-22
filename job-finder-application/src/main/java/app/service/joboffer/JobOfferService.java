@@ -2,11 +2,8 @@ package app.service.joboffer;
 
 import app.model.dto.joboffer.CreateJobOfferRequest;
 import app.model.dto.joboffer.JobOfferDTO;
-import app.model.entity.jobapplication.JobApplication;
 import app.model.entity.joboffer.JobOffer;
-import app.model.entity.skill.Skill;
 import app.model.entity.user.User;
-import app.model.enums.EmploymentType;
 import app.model.enums.UserRole;
 import app.repository.joboffer.JobOfferRepository;
 import app.repository.user.UserRepository;
@@ -14,10 +11,8 @@ import app.utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service

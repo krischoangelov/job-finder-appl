@@ -3,7 +3,6 @@ package app.model.dto.jobapplication;
 import app.model.entity.joboffer.JobOffer;
 import app.model.entity.user.User;
 import app.model.enums.ApplicationStatus;
-import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 
