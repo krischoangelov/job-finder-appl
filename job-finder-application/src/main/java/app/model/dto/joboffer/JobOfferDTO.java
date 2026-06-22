@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class JobOfferDTO {
     private BigDecimal salary;
     private EmploymentType type;
     private LocalDateTime createdOn;
-    private LocalDateTime deadline;
+    private LocalDate deadline;
     private User recruiter;
-    private List<JobApplicationDTO> jobApplications = new ArrayList<>();
+    private List<JobApplicationDTO> jobApplications;
 }

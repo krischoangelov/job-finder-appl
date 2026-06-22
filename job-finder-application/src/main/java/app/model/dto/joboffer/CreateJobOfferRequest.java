@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -19,6 +20,6 @@ public class CreateJobOfferRequest {
     private BigDecimal salary;
     private EmploymentType type;
     private LocalDateTime createdOn;
-    private LocalDateTime deadline;
+    private LocalDate deadline;
     private User recruiter;
 }

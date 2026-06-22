@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class JobOffer {
     @Enumerated(EnumType.STRING)
     private EmploymentType type;
     private LocalDateTime createdOn;
-    private LocalDateTime deadline;
+    private LocalDate deadline;
     @ManyToOne
     @JoinColumn(name = "recruiter_id")
     private User recruiter;

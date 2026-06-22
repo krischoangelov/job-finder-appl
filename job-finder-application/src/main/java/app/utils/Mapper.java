@@ -59,7 +59,7 @@ public class Mapper {
             return null;
         }
 
-        List<JobApplicationDTO> jobApplicationDTOList = jobOffer.getJobApplications()
+        List<JobApplicationDTO> jobApplicationDTOList = jobOffer.getJobApplications() == null ? List.of() : jobOffer.getJobApplications()
                 .stream()
                 .map(Mapper::toJobApplicationDTO)
                 .toList();

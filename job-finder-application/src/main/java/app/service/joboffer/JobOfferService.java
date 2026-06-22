@@ -4,6 +4,7 @@ import app.model.dto.joboffer.CreateJobOfferRequest;
 import app.model.dto.joboffer.JobOfferDTO;
 import app.model.entity.jobapplication.JobApplication;
 import app.model.entity.joboffer.JobOffer;
+import app.model.entity.skill.Skill;
 import app.model.entity.user.User;
 import app.model.enums.EmploymentType;
 import app.model.enums.UserRole;
@@ -50,7 +51,7 @@ public class JobOfferService {
                 .salary(createJobOfferRequest.getSalary())
                 .type(createJobOfferRequest.getType())
                 .createdOn(start)
-                .deadline(start.plusMonths(1))
+                .deadline(createJobOfferRequest.getDeadline())
                 .recruiter(recruiter)
                 .build();
 
@@ -73,16 +74,37 @@ public class JobOfferService {
         return Mapper.toJobOfferDTO(jobOffer);
     }
 
+    public JobOfferDTO updateJobOffer(UUID id, UUID recruiterId, JobOfferDTO jobOfferDTO) {
+        JobOffer jobOffer = jobOfferRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("No such job offer was found"));
 
-    public void deleteJobOffer(UUID jobOfferId) {
-        JobOffer jobOffer = jobOfferRepository.findById(jobOfferId).orElse(null);
-
-        if (jobOffer == null) {
-            throw new RuntimeException("No such job offer exists");
+        if (!jobOffer.getRecruiter().getId().equals(recruiterId)) {
+            throw new RuntimeException("You are not allowed to edit this job offer");
         }
 
-//        jobOfferRepository.de
+        jobOffer.setTitle(jobOfferDTO.getTitle());
+        jobOffer.setCompany(jobOfferDTO.getCompany());
+        jobOffer.setLocation(jobOfferDTO.getLocation());
+        jobOffer.setDescription(jobOfferDTO.getDescription());
+        jobOffer.setSalary(jobOfferDTO.getSalary());
+        jobOffer.setType(jobOfferDTO.getType());
+        jobOffer.setDeadline(jobOfferDTO.getDeadline());
 
+        jobOfferRepository.save(jobOffer);
+
+        return Mapper.toJobOfferDTO(jobOffer);
+    }
+
+
+    public void deleteJobOffer(UUID jobOfferId, UUID recruiterId) {
+        JobOffer jobOffer = jobOfferRepository.findById(jobOfferId)
+                .orElseThrow(() -> new RuntimeException("Job offer not found"));
+
+        if (!jobOffer.getRecruiter().getId().equals(recruiterId)) {
+            throw new RuntimeException("You are not allowed to delete this job offer");
+        }
+
+        jobOfferRepository.delete(jobOffer);
 
     }
 }
