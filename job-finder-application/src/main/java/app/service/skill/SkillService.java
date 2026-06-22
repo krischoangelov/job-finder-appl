@@ -54,4 +54,42 @@ public class SkillService {
         return skillRepository.findByUser(user).stream().map(Mapper::toSkillDTO).toList();
     }
 
+    public SkillDTO getSkillBySkillIdAndUserId(UUID skillId, UUID userId) {
+        Skill skill = skillRepository.findById(skillId).
+                orElseThrow(() ->  new RuntimeException("No such skill was found"));
+
+        if (!skill.getUser().getId().equals(userId)) {
+            throw new RuntimeException("You are not allowed to edit this skill");
+        }
+
+        return Mapper.toSkillDTO(skill);
+    }
+
+
+    public SkillDTO updateSkill(UUID skillId, UUID userId, SkillDTO skillDTO) {
+        Skill skill = skillRepository.findById(skillId).
+                orElseThrow(() ->  new RuntimeException("No such skill was found"));
+
+        if (!skill.getUser().getId().equals(userId)) {
+            throw new RuntimeException("You are not allowed to edit this skill");
+        }
+
+        skill.setName(skillDTO.getName());
+        skill.setLevel(skillDTO.getLevel());
+
+        skillRepository.save(skill);
+
+        return Mapper.toSkillDTO(skill);
+    }
+
+    public void deleteSkill(UUID skillId, UUID userId) {
+        Skill skill = skillRepository.findById(skillId)
+                .orElseThrow(() -> new RuntimeException("Skill not found"));
+
+        if (!skill.getUser().getId().equals(userId)) {
+            throw new RuntimeException("You are not allowed to delete this skill");
+        }
+
+        skillRepository.delete(skill);
+    }
 }

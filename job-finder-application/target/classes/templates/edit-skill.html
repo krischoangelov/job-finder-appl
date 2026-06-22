@@ -33,7 +33,7 @@
                 <label>Level</label>
 
                 <select class="form-control"
-                        th:field="*{proficiencyLevel}">
+                        th:field="*{level}">
 
                     <option value="BEGINNER">Beginner</option>
                     <option value="INTERMEDIATE">Intermediate</option>
@@ -44,9 +44,27 @@
 
             </div>
 
-            <button class="btn btn-warning mt-3">
-                Update Skill
-            </button>
+            <div class="mt-3">
+
+                <button class="btn btn-warning">
+                    Update Skill
+                </button>
+
+            </div>
+
+            <hr>
+
+            <form th:action="@{/skills/{id}/delete(id=${skillId})}"
+                  method="post">
+
+                <button type="submit"
+                        class="btn btn-danger">
+
+                    Delete Skill
+
+                </button>
+
+            </form>
 
         </form>
 

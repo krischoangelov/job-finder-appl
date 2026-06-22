@@ -6,10 +6,7 @@ import app.service.skill.SkillService;
 import app.service.user.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -59,6 +56,35 @@ public class SkillController {
                 createSkillRequest.getName(),
                 createSkillRequest.getLevel()
         );
+
+        return new ModelAndView("redirect:/skills");
+    }
+
+    @GetMapping("/{id}/edit")
+    public ModelAndView getEditSkillPage(@PathVariable UUID id, HttpSession httpSession) {
+        UUID userid = (UUID) httpSession.getAttribute("user_id");
+
+        SkillDTO skill = skillService.getSkillBySkillIdAndUserId(id, userid);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("edit-skill");
+        modelAndView.addObject("skillDTO", skill);
+        modelAndView.addObject("skillId", id);
+        return modelAndView;
+    }
+
+    @PostMapping("/{id}/edit")
+    public ModelAndView editSkill(@PathVariable UUID id, @ModelAttribute SkillDTO skillDTO, HttpSession httpSession) {
+        UUID userId = (UUID) httpSession.getAttribute("user_id");
+        skillService.updateSkill(id, userId, skillDTO);
+        return new ModelAndView("redirect:/skills");
+    }
+
+    @PostMapping("/{id}/delete")
+    public ModelAndView deleteSkill(@PathVariable UUID id, HttpSession httpSession) {
+        UUID userId = (UUID) httpSession.getAttribute("user_id");
+
+        skillService.deleteSkill(id, userId);
 
         return new ModelAndView("redirect:/skills");
     }
