@@ -44,13 +44,12 @@ public class UserService {
             throw new RuntimeException("User with this username already exists");
         }
 
-        String encodedPassword = passwordEncoder.encode(userRegisterRequest.getPassword());
-        userRegisterRequest.setPassword(encodedPassword);
-
         if (!userRegisterRequest.getPassword().equals(userRegisterRequest.getConfirmPassword())) {
             throw new RuntimeException("Passwords do not match");
         }
 
+        String encodedPassword = passwordEncoder.encode(userRegisterRequest.getPassword());
+        userRegisterRequest.setPassword(encodedPassword);
 
         User entityUser = Mapper.toUserEntity(userRegisterRequest);
 

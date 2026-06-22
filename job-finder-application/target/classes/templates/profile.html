@@ -18,7 +18,7 @@
 
         <div th:replace="~{fragments/messages :: messages}"></div>
 
-        <form th:action="@{/profile/{id}(id=${userDTO.id})}"
+        <form th:action="@{/profile}"
               th:object="${userDTO}"
               method="post">
 
