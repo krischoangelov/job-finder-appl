@@ -10,13 +10,6 @@
 
 <main class="dashboard-container container">
 
-    <div class="dashboard-banner mb-4">
-
-        <img th:src="@{/images/dashboard-banner.jpg}"
-             alt="Dashboard Banner">
-
-    </div>
-
     <h1 class="mb-4">
         Welcome, <span th:text="${user.firstName}"></span>!
     </h1>
@@ -26,17 +19,17 @@
     <div class="stats-grid">
 
         <div class="stat-card">
-            <h2 th:text="${user.getCreatedJobs()}"></h2>
+            <h2 th:text="${user.createdJobs.size()}"></h2>
             <p>Jobs Posted</p>
         </div>
 
         <div class="stat-card">
-            <h2 th:text="${user.getJobApplications()}"></h2>
+            <h2 th:text="${user.jobApplications.size()}"></h2>
             <p>Applications</p>
         </div>
 
         <div class="stat-card">
-            <h2 th:text="${user.getSkills()}"></h2>
+            <h2 th:text="${user.skills.size()}"></h2>
             <p>Skills</p>
         </div>
 
@@ -49,7 +42,7 @@
     <div class="row">
 
         <div class="col-md-4 mb-3"
-             th:each="job : ${user.getCreatedJobs()}">
+             th:each="job : ${user.createdJobs}">
 
             <div class="card-custom">
 
